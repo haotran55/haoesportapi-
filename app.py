@@ -4,9 +4,14 @@ from twilio.rest import Client
 
 app = Flask(__name__)
 
-# Lấy thông tin xác thực từ biến môi trường
-account_sid = os.getenv('AC9e1c95e1273edea03865c721259695e3')
-auth_token = os.getenv('f7a9bc69023d2ada26f3cfb1a5a59688')
+# Lấy thông tin xác thực từ biến môi trường (sử dụng biến môi trường đúng tên)
+account_sid = os.getenv('TWILIO_ACCOUNT_SID')  # Cập nhật tên biến môi trường đúng
+auth_token = os.getenv('TWILIO_AUTH_TOKEN')  # Cập nhật tên biến môi trường đúng
+
+# Kiểm tra nếu không có thông tin xác thực trong biến môi trường
+if not account_sid or not auth_token:
+    raise ValueError("No Twilio credentials provided! Please set 'TWILIO_ACCOUNT_SID' and 'TWILIO_AUTH_TOKEN'.")
+
 client = Client(account_sid, auth_token)
 
 @app.route('/send_sms', methods=['POST'])
