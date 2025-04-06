@@ -50,4 +50,8 @@ def like():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+# Lấy cổng từ biến môi trường PORT mà Render cung cấp, mặc định là 5000 nếu không có
+port = int(os.getenv("PORT", 5000))
+
+app.run(debug=True, host="0.0.0.0", port=port)
+
