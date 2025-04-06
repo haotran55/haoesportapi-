@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import random
+import os
 
 app = Flask(__name__)
 
@@ -49,9 +50,9 @@ def like():
         "likes_given": likes_given
     })
 
-if __name__ == '__main__':
 # Lấy cổng từ biến môi trường PORT mà Render cung cấp, mặc định là 5000 nếu không có
 port = int(os.getenv("PORT", 5000))
 
-app.run(debug=True, host="0.0.0.0", port=port)
-
+# Lắng nghe trên tất cả các địa chỉ IP và cổng được Render chỉ định
+if __name__ == '__main__':
+    app.run(debug=True, host="0.0.0.0", port=port)
